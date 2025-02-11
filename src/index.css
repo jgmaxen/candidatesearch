@@ -206,8 +206,8 @@ h1 {
   }
 
   .card {
-    background: white;
-    color: black;
+    background: black;
+    color: white;
   }
 }
 .card {
