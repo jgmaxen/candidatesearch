@@ -1,33 +1,68 @@
-# React + TypeScript + Vite
+Candidate Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 Live Demo: Candidate Search App
 
-Currently, two official plugins are available:
+📌 Overview
+The Candidate Search App allows users to browse through potential GitHub candidates, save them for later review, and manage their selections. This application fetches random GitHub profiles and presents their details in an easy-to-use interface.
 
-* [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md), which uses [Babel](https://babeljs.io/) for Fast Refresh
-* [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc), which uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Features
+🔍 Search Candidates - Browse through random GitHub users.
+✅ Save Candidates - Add candidates to a Potential Candidates list.
+❌ Reject Candidates - Skip a candidate and load a new one.
+📌 View Saved Candidates - See a list of previously saved candidates.
+🎨 Modern UI - Styled with a dark theme and smooth animations.
+🛠️ Technologies Used
+Frontend: React, TypeScript
+Routing: React Router
+State Management: React Hooks
+API: GitHub Users API
+Deployment: Render
+📂 Project Structure
+bash
+Copy
+Edit
+/src
+ ├── /components
+ │   ├── Nav.tsx
+ ├── /pages
+ │   ├── CandidateSearch.tsx
+ │   ├── PotentialCandidates.tsx
+ ├── /api
+ │   ├── API.tsx
+ ├── App.tsx
+ ├── index.tsx
+ ├── styles.css
+ ├── README.md
+📖 How to Use
+1️⃣ Visit the App: Candidate Search
+2️⃣ Navigate:
 
-## Expanding the ESLint configuration
-
-If you're developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-* Configure the top-level `parserOptions` property as follows:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-* Replace `plugin:@typescript-eslint/recommended` with `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`.
-* Optionally, add `plugin:@typescript-eslint/stylistic-type-checked`.
-* Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` and `plugin:react/jsx-runtime` to the `extends` list.
-
----
-© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+Click Home to search for candidates.
+Click Potential Candidates to view saved profiles.
+3️⃣ Interact:
+Click the ( - ) button to reject a candidate.
+Click the ( + ) button to save a candidate.
+🛠️ Setup & Installation
+1️⃣ Clone the Repository
+bash
+Copy
+Edit
+git clone https://github.com/YOUR_GITHUB/candidate-search.git
+cd candidate-search
+2️⃣ Install Dependencies
+bash
+Copy
+Edit
+npm install
+3️⃣ Start the Development Server
+bash
+Copy
+Edit
+npm run dev
+4️⃣ Build for Production
+bash
+Copy
+Edit
+npm run build
+📸 Screenshot
+![Screenshot 2025-02-11 at 2 59 55 PM](https://github.com/user-attachments/assets/f94bf919-e17d-4b95-856c-5636518f341f)
