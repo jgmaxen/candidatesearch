@@ -68,6 +68,11 @@ const searchGithubUser = async (username: string): Promise<Candidate | null> => 
     });
 
     if (!response.ok) {
+      if (response.status === 404) {
+        console.warn(`⚠️ User ${username} not found (404). Skipping...`);
+        return null; // ✅ Skip this user and try another one
+      }
+
       console.error(`⚠️ GitHub API Error ${response.status}: ${response.statusText}`);
 
       if (response.status === 403) {

@@ -15,11 +15,14 @@ const CandidateSearch = () => {
   const [candidate, setCandidate] = useState<Candidate | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
 
   useEffect(() => {
     loadCandidate();
+    loadSavedCandidates();
   }, []);
 
+  /** 🔹 Fetch and load a valid candidate */
   const loadCandidate = async () => {
     setLoading(true);
     setError(null);
@@ -28,19 +31,20 @@ const CandidateSearch = () => {
       console.log("🔍 Fetching candidate list...");
       const users = await searchGithub();
 
-      if (Array.isArray(users) && users.length > 0) {
-        const username = users[0].login;
-        console.log("📌 Fetching details for:", username);
-        const userDetails = await searchGithubUser(username);
+      for (const user of users) {
+        console.log("📌 Fetching details for:", user.login);
+        const userDetails = await searchGithubUser(user.login);
 
-        if (userDetails && userDetails.login) {
+        if (userDetails) {
+          console.log("✅ Candidate data received:", userDetails);
           setCandidate(userDetails);
-        } else {
-          throw new Error("⚠️ Invalid candidate data received");
+          setLoading(false);
+          return; // ✅ Exit loop when a valid candidate is found
         }
-      } else {
-        setCandidate(null);
       }
+
+      console.warn("⚠️ No valid candidates found.");
+      setCandidate(null);
     } catch (err) {
       setError("❌ Failed to load candidate. Please try again.");
       console.error("⚠️ Error fetching candidate:", err);
@@ -49,24 +53,29 @@ const CandidateSearch = () => {
     }
   };
 
-  const saveCandidate = () => {
-    if (candidate) {
-      try {
-        const savedCandidates: Candidate[] = JSON.parse(localStorage.getItem("savedCandidates") || "[]");
-
-        // Ensure candidate is not already saved
-        if (!savedCandidates.some((c) => c.login === candidate.login)) {
-          localStorage.setItem("savedCandidates", JSON.stringify([...savedCandidates, candidate]));
-          console.log("✅ Candidate saved:", candidate);
-        } else {
-          console.warn("⚠️ Candidate already saved:", candidate.login);
-        }
-
-        loadCandidate(); // Load next candidate after saving
-      } catch (err) {
-        console.error("⚠️ Error saving candidate:", err);
-      }
+  /** 🔹 Load saved candidates from local storage */
+  const loadSavedCandidates = () => {
+    const storedCandidates = localStorage.getItem("savedCandidates");
+    if (storedCandidates) {
+      setSavedCandidates(JSON.parse(storedCandidates));
     }
+  };
+
+  /** 🔹 Save candidate to local storage */
+  const saveCandidate = () => {
+    if (!candidate) return;
+
+    const alreadySaved = savedCandidates.some((c) => c.login === candidate.login);
+    if (!alreadySaved) {
+      const updatedCandidates = [...savedCandidates, candidate];
+      setSavedCandidates(updatedCandidates);
+      localStorage.setItem("savedCandidates", JSON.stringify(updatedCandidates));
+      console.log("✅ Candidate saved:", candidate);
+    } else {
+      console.warn("⚠️ Candidate already saved:", candidate.login);
+    }
+
+    loadCandidate(); // Load a new candidate after saving
   };
 
   return (
