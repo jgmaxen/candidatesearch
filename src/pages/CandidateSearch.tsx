@@ -63,19 +63,24 @@ const CandidateSearch = () => {
 
   /** 🔹 Save candidate to local storage */
   const saveCandidate = () => {
-    if (!candidate) return;
+    if (candidate) {
+      try {
+        const savedCandidates: Candidate[] = JSON.parse(localStorage.getItem("savedCandidates") || "[]");
 
-    const alreadySaved = savedCandidates.some((c) => c.login === candidate.login);
-    if (!alreadySaved) {
-      const updatedCandidates = [...savedCandidates, candidate];
-      setSavedCandidates(updatedCandidates);
-      localStorage.setItem("savedCandidates", JSON.stringify(updatedCandidates));
-      console.log("✅ Candidate saved:", candidate);
-    } else {
-      console.warn("⚠️ Candidate already saved:", candidate.login);
+        // ✅ Prevent Duplicate Entries
+        if (!savedCandidates.some((c) => c.login === candidate.login)) {
+          const updatedCandidates = [...savedCandidates, candidate];
+          localStorage.setItem("savedCandidates", JSON.stringify(updatedCandidates));
+          setSavedCandidates(updatedCandidates); // ✅ Updates state to reflect change
+          console.log("✅ Candidate saved:", candidate);
+          loadCandidate(); // ✅ Load the next candidate immediately
+        } else {
+          console.warn("⚠️ Candidate already saved:", candidate.login);
+        }
+      } catch (err) {
+        console.error("❌ Error saving candidate:", err);
+      }
     }
-
-    loadCandidate(); // Load a new candidate after saving
   };
 
   return (

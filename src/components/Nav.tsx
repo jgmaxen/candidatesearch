@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Nav = () => {
@@ -11,7 +12,7 @@ const Nav = () => {
   };
 
   return (
-    <nav style={navStyle}>
+    <nav style={navStyle as CSSProperties}>
       <ul style={navListStyle}>
         <li>
           <button
@@ -34,24 +35,29 @@ const Nav = () => {
   );
 };
 
-// 🔹 Updated Styles - No Background on Buttons
-const navStyle = {
+// 🔹 Fixed TypeScript Styles (Moves Navigation to Top Left)
+const navStyle: CSSProperties = {
+  position: "absolute", // ✅ Fixes TypeScript error
+  top: 10, // ✅ Numbers work without "px"
+  left: 20, // ✅ Ensures proper positioning
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "flex-start",
+  alignItems: "center",
   padding: "10px",
-  backgroundColor: "transparent", // ✅ Removes black background
+  backgroundColor: "transparent", // ✅ No background
 };
 
-const navListStyle = {
+const navListStyle: CSSProperties = {
   listStyle: "none",
   display: "flex",
-  gap: "20px",
+  gap: "15px",
   padding: 0,
+  margin: 0,
 };
 
-const linkStyle = {
+const linkStyle: CSSProperties = {
   color: "white",
-  background: "none", // ✅ Removes any background
+  background: "none",
   border: "none",
   fontSize: "18px",
   padding: "8px 12px",
@@ -60,10 +66,10 @@ const linkStyle = {
 };
 
 // 🔹 Highlights Active Page with Text Only (No Background)
-const activeLinkStyle = {
+const activeLinkStyle: CSSProperties = {
   ...linkStyle,
   fontWeight: "bold",
-  textDecoration: "underline", // ✅ Highlights text instead of background
+  textDecoration: "underline",
 };
 
 export default Nav;
