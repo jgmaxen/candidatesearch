@@ -4,13 +4,13 @@ import './index.css';
 
 import App from './App.tsx';
 import CandidateSearch from './pages/CandidateSearch.tsx';
-import SavedCandidates from './pages/SavedCandidates.tsx';
+import PotentialCandidates from './pages/PotentialCandidates.tsx'; // ✅ Fixed import
 import ErrorPage from './pages/ErrorPage.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />, // ✅ App is now a layout component
+    element: <App />, // ✅ App remains a layout component
     errorElement: <ErrorPage />,
     children: [
       {
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
         element: <CandidateSearch />,
       },
       {
-        path: 'saved', // ✅ Use lowercase and remove "/"
-        element: <SavedCandidates />,
+        path: 'potential', // ✅ Corrected path
+        element: <PotentialCandidates />, // ✅ Corrected component name
       },
     ],
   },

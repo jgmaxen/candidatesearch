@@ -13,19 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 🔹 Improve Link Styling */
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-/* 🔹 Background and Layout */
+/* 🔹 Background & Page Layout */
 body {
   background: linear-gradient(180deg, rgb(32, 44, 136) 0%, rgba(9, 9, 121, 1) 15%, rgba(0, 2, 18, 1) 100%);
   background-size: cover;
@@ -40,14 +28,125 @@ body {
   min-height: 100vh;
 }
 
-/* 🔹 Improve Headings */
+/* 🔹 Page Heading */
 h1 {
   font-size: 3rem;
   font-weight: 700;
   color: white;
   text-align: center;
   margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 10px white
+  text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* 🔹 Navigation Bar */
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 15px 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav button:hover {
+  color: #646cff;
+}
+
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* 🔹 Candidate Table */
+.candidate-table {
+  width: 85%;
+  border-collapse: collapse;
+  background-color: black;
+  color: white;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+  margin-top: 20px;
+}
+
+.candidate-table th,
+.candidate-table td {
+  padding: 14px;
+  text-align: left;
+  border: 1px solid #444;
+}
+
+.candidate-table th {
+  background-color: black;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.candidate-table tbody tr:nth-child(odd) {
+  background-color: #333;
+}
+
+.candidate-table tbody tr:hover {
+  background-color: #444;
+}
+
+/* 🔹 Candidate Image */
+.candidate-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 🔹 Email Link */
+.email-link {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+.email-link:hover {
+  text-decoration: underline;
+}
+
+/* 🔹 Reject Button */
+.reject-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  box-shadow: 0px 4px 6px rgba(255, 0, 0, 0.4);
+}
+
+.reject-btn:hover {
+  background-color: darkred;
+  box-shadow: 0px 6px 10px rgba(255, 0, 0, 0.6);
 }
 
 /* 🔹 Candidate Card */
@@ -57,7 +156,7 @@ h1 {
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
   padding: 25px;
   max-width: 400px;
-  margin: 20px auto; /* Centers the card */
+  margin: 20px auto;
   text-align: center;
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -88,35 +187,8 @@ h1 {
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 30px;  /* Increased spacing between buttons */
+  gap: 30px;
   margin-top: 20px;
-}
-
-/* 🔹 Buttons - Improved Styling */
-button {
-  border-radius: 50px;
-  border: none;
-  padding: 14px 22px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 🔹 Reject Button (Red) */
-.reject {
-  background: #e63946;
-  color: white;
-  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
-}
-
-.reject:hover {
-  background: #c71c22;
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
 }
 
 /* 🔹 Accept Button (Green) */
@@ -129,71 +201,6 @@ button {
 .accept:hover {
   background: #27ae60;
   box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
-}
-
-/* 🔹 Navigation */
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 1em 2em;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-}
-
-.nav-item {
-  padding: 0 1rem;
-  list-style: none;
-}
-
-.nav-link {
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
-
-.nav-link:hover {
-  color: #646cff;
-}
-
-.active {
-  font-weight: 700;
-  text-decoration: underline;
-}
-
-/* 🔹 Tables */
-tr {
-  border-radius: 10px;
-  background-color: #000;
-  color: white;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #222;
-}
-
-.table {
-  width: 80vw;
-  max-width: 900px;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-.table th, .table td {
-  padding: 12px;
-  text-align: left;
-}
-
-.table th {
-  background-color: #444;
-  color: white;
-}
-
-.table tbody tr:hover {
-  background-color: #333;
 }
 
 /* 🔹 Animations */

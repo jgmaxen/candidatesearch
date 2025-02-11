@@ -12,7 +12,7 @@ const Nav = () => {
   };
 
   return (
-    <nav style={navStyle as CSSProperties}>
+    <nav style={navStyle}>
       <ul style={navListStyle}>
         <li>
           <button
@@ -24,10 +24,10 @@ const Nav = () => {
         </li>
         <li>
           <button
-            onClick={() => handleNavigate("/saved")}
-            style={location.pathname === "/saved" ? activeLinkStyle : linkStyle}
+            onClick={() => handleNavigate("/potential")} // ✅ Fixed navigation
+            style={location.pathname === "/potential" ? activeLinkStyle : linkStyle}
           >
-            Saved Candidates
+            Potential Candidates
           </button>
         </li>
       </ul>
@@ -35,16 +35,15 @@ const Nav = () => {
   );
 };
 
-// 🔹 Fixed TypeScript Styles (Moves Navigation to Top Left)
 const navStyle: CSSProperties = {
-  position: "absolute", // ✅ Fixes TypeScript error
-  top: 10, // ✅ Numbers work without "px"
-  left: 20, // ✅ Ensures proper positioning
+  position: "fixed",
+  top: 10,
+  left: 20,
   display: "flex",
-  justifyContent: "flex-start",
   alignItems: "center",
   padding: "10px",
-  backgroundColor: "transparent", // ✅ No background
+  zIndex: 1000,
+  backgroundColor: "transparent",
 };
 
 const navListStyle: CSSProperties = {
@@ -65,7 +64,6 @@ const linkStyle: CSSProperties = {
   transition: "color 0.3s",
 };
 
-// 🔹 Highlights Active Page with Text Only (No Background)
 const activeLinkStyle: CSSProperties = {
   ...linkStyle,
   fontWeight: "bold",
