@@ -15,7 +15,7 @@ const CandidateSearch = () => {
   const [candidate, setCandidate] = useState<Candidate | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
+  const [__savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
 
   useEffect(() => {
     loadCandidate();
@@ -64,19 +64,19 @@ const CandidateSearch = () => {
   const saveCandidate = () => {
     if (candidate) {
       try {
-        const savedCandidates: Candidate[] = JSON.parse(localStorage.getItem("savedCandidates") || "[]");
+        const storedCandidates: Candidate[] = JSON.parse(localStorage.getItem("savedCandidates") || "[]");
 
         // ✅ Prevent Duplicate Entries
-        if (!savedCandidates.some((c) => c.login === candidate.login)) {
-          const updatedCandidates = [...savedCandidates, candidate];
+        if (!storedCandidates.some((c) => c.login === candidate.login)) {
+          const updatedCandidates = [...storedCandidates, candidate];
           localStorage.setItem("savedCandidates", JSON.stringify(updatedCandidates));
-          setSavedCandidates(updatedCandidates); // ✅ Updates state
+
+          setSavedCandidates(updatedCandidates); // ✅ Update state
           console.log("✅ Candidate saved:", candidate);
+          loadCandidate(); // ✅ Load the next candidate immediately
         } else {
           console.warn("⚠️ Candidate already saved:", candidate.login);
         }
-
-        loadCandidate(); // ✅ Load the next candidate immediately
       } catch (err) {
         console.error("❌ Error saving candidate:", err);
       }
