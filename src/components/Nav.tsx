@@ -19,7 +19,7 @@ const Nav = () => {
             onClick={() => handleNavigate("/")}
             style={location.pathname === "/" ? activeLinkStyle : linkStyle}
           >
-            Search Candidates
+            Home
           </button>
         </li>
         <li>
