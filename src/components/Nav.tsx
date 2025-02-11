@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   return (
     <nav style={navStyle}>
-      <h1>GitHub Candidate Search</h1>
+      <h1></h1>
       <ul style={navListStyle}>
         <li>
           <Link to="/" style={linkStyle}>Search Candidates</Link>
@@ -20,7 +20,7 @@ const Nav = () => {
 const navStyle = {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center",
+  alignItems: "flex-start",
   padding: "10px 20px",
   backgroundColor: "#282c34",
   color: "white",

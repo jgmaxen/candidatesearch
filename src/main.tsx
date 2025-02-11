@@ -10,15 +10,15 @@ import ErrorPage from './pages/ErrorPage.tsx';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App />, // ✅ App is now a layout component
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        index: true, // ✅ Default child route ("/")
         element: <CandidateSearch />,
       },
       {
-        path: '/SavedCandidates',
+        path: 'saved', // ✅ Use lowercase and remove "/"
         element: <SavedCandidates />,
       },
     ],
